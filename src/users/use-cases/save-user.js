@@ -18,7 +18,7 @@ export const saveUser = async (userLike) =>{
     let userUpdated;
 
     if(user.id){
-        userUpdated = updateUser(userToSave);
+        userUpdated = await updateUser(userToSave);
     }else
     {
         userUpdated = await createUser(userToSave);

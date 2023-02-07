@@ -65,7 +65,11 @@ export const renderModal = (element, callback) =>{
         const form1Data = new FormData(form);
         const userLike = {...loadedUser};
 
-        for (let [key, value] of form1Data){
+        //Esto se relizo debido a que al no activar el check no viene la propiedad en el form
+        if (!(form1Data.hasOwnProperty('isActive'))) userLike.isActive = false ;
+
+
+        for (let [key, value,i] of form1Data){
             if(key === 'balance'){
                 userLike[key] = +value; //+value en el caso de poner como numero es igual  a poner Number(value);
                 continue;
@@ -84,6 +88,7 @@ export const renderModal = (element, callback) =>{
         callback(userLike)
             .then(user=>{
                 hideModal();
+                modal.querySelector('button').innerText = 'Save';
             }).catch(console.log)
         // console.log(userLike)
         
